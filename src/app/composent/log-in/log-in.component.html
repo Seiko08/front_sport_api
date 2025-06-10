@@ -1,0 +1,69 @@
+  <div class="card shadow-lg border-0 rounded-4" style="max-width: 430px; width: 100%;">
+    <div class="card-body p-4">
+      <h2 class="mb-4 text-center fw-bold text-primary">
+        <i class="bi bi-person-circle"></i>
+        Connexion
+      </h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Email</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
+            <input
+              id="email"
+              type="email"
+              class="form-control"
+              formControlName="email"
+              [ngClass]="{
+                'is-invalid': loginForm.get('email')?.touched && loginForm.get('email')?.invalid,
+                'is-valid': loginForm.get('email')?.touched && loginForm.get('email')?.valid
+              }"
+              required
+              autocomplete="email"
+              placeholder="exemple@mail.com"
+            />
+            <div class="invalid-feedback" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+              <span *ngIf="loginForm.get('email')?.errors?.['required']">L'email est requis.</span>
+              <span *ngIf="loginForm.get('email')?.errors?.['email']">L'email n'est pas valide.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="mb-4">
+          <label for="password" class="form-label fw-semibold">Mot de passe</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text bg-white"><i class="bi bi-lock"></i></span>
+            <input
+              id="password"
+              type="password"
+              class="form-control"
+              formControlName="password"
+              [ngClass]="{
+                'is-invalid': loginForm.get('password')?.touched && loginForm.get('password')?.invalid,
+                'is-valid': loginForm.get('password')?.touched && loginForm.get('password')?.valid
+              }"
+              required
+              autocomplete="current-password"
+              placeholder="Mot de passe"
+            />
+            <div class="invalid-feedback" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+              <span *ngIf="loginForm.get('password')?.errors?.['required']">Mot de passe requis.</span>
+              <span *ngIf="loginForm.get('password')?.errors?.['minlength'] as minlengthErr">
+                Minimum {{ minlengthErr.requiredLength }} caractères.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 fw-semibold py-2" [disabled]="submitting || loginForm.invalid">
+          {{ submitting ? 'Connexion...' : 'Se connecter' }}
+        </button>
+
+        <div *ngIf="message" class="alert mt-3 mb-0 text-center" [ngClass]="isError ? 'alert-danger' : 'alert-success'">
+          {{ message }}
+        </div>
+      </form>
+    </div>
+  </div>
