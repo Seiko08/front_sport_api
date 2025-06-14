@@ -1,0 +1,77 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Créer un événement</h2>
+  <form [formGroup]="eventform" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label">Nom de l'événement</label>
+      <input type="text" class="form-control" formControlName="label" />
+      <div class="text-danger" *ngIf="eventform.get('label')?.invalid && eventform.get('label')?.touched">
+        Ce champ est requis.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Date</label>
+      <input type="date" class="form-control" formControlName="date" />
+      <div class="text-danger" *ngIf="eventform.get('date')?.errors?.['pastDate']">
+        La date doit être dans le futur.
+      </div>
+      <div class="text-danger" *ngIf="eventform.get('date')?.invalid && eventform.get('date')?.touched">
+        Ce champ est requis.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Type</label>
+      <input type="text" class="form-control" formControlName="type" />
+      <div class="text-danger" *ngIf="eventform.get('type')?.invalid && eventform.get('type')?.touched">
+        Ce champ est requis.
+      </div>
+    </div>
+
+    <h4 class="mt-4">Adresse</h4>
+    <div formGroupName="address">
+      <div class="row">
+        <div class="col-md-2 mb-3">
+          <label class="form-label">Numéro</label>
+          <input type="text" class="form-control" formControlName="number" />
+          <div class="text-danger" *ngIf="eventform.get('address.number')?.invalid && eventform.get('address.number')?.touched">
+            Numéro invalide.
+          </div>
+        </div>
+        <div class="col-md-10 mb-3">
+          <label class="form-label">Rue</label>
+          <input type="text" class="form-control" formControlName="street" />
+          <div class="text-danger" *ngIf="eventform.get('address.street')?.invalid && eventform.get('address.street')?.touched">
+            Ce champ est requis.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Code postal</label>
+          <input type="text" class="form-control" formControlName="postalCode" />
+          <div class="text-danger" *ngIf="eventform.get('address.postalCode')?.invalid && eventform.get('address.postalCode')?.touched">
+            Code postal invalide.
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Ville</label>
+          <input type="text" class="form-control" formControlName="city" />
+          <div class="text-danger" *ngIf="eventform.get('address.city')?.invalid && eventform.get('address.city')?.touched">
+            Ce champ est requis.
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Pays</label>
+          <input type="text" class="form-control" formControlName="country" />
+          <div class="text-danger" *ngIf="eventform.get('address.country')?.invalid && eventform.get('address.country')?.touched">
+            Ce champ est requis.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3" [disabled]="eventform.invalid">Créer l'événement</button>
+  </form>
+</div>

@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiBackService } from '../../service/api-back.service';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -18,7 +20,8 @@ export class LogInComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private api: ApiBackService
+    private api: ApiBackService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +43,8 @@ export class LogInComponent implements OnInit {
     this.api.connexion(this.loginForm.value).subscribe({
       next: (res:any) => {
         this.message = `Connection réussie ${res.id}`;
-        localStorage.setItem('token', res.token);
+        localStorage.setItem('token', res.access_token);
+        this.router.navigate(['/home']);
       },
       error: (err:Error) => {
         this.isError = true;
