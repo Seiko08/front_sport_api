@@ -1,0 +1,12 @@
+<div class="card mt-4 shadow-sm">
+  <div class="card-header bg-primary text-white">
+    <h5 class="mb-0">Détails de l'utilisateur</h5>
+  </div>
+  <div class="card-body">
+    <p><strong>Prénom :</strong> {{ user?.firstname }}</p>
+    <p><strong>Nom :</strong> {{ user?.lastname }}</p>
+    <p><strong>Email :</strong> {{ user?.email }}</p>
+    <p><strong>Date de naissance :</strong> {{ user?.birthday | date:'dd/MM/yyyy' }}</p>
+    <p><strong>Rôle :</strong> {{ user?.role }}</p>
+  </div>
+</div>
