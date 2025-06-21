@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiBackService } from '../../service/api-back.service';
 import { Router } from '@angular/router';
+import { AuthUserService } from '../../service/user-auth.service';
 
 
 
@@ -21,7 +22,8 @@ export class LogInComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private api: ApiBackService,
-    private router: Router
+    private router: Router,
+    private readonly userAuthService: AuthUserService
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +46,7 @@ export class LogInComponent implements OnInit {
       next: (res:any) => {
         this.message = `Connection réussie ${res.id}`;
         localStorage.setItem('token', res.access_token);
+        this.userAuthService.setUser(res.user);
         this.router.navigate(['/home']);
       },
       error: (err:Error) => {
