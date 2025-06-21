@@ -62,9 +62,33 @@ export class ApiBackService {
 createEvent<T>(body: any): Observable<T> {
     return this.apiCall<T>('post', 'events', body);
   }
+updateEvent<T>(body: any, eventId:string | null): Observable<T> {
+    return this.apiCall<T>('put', `events/${eventId}`, body);
+  }
 
 getUser<T>(): Observable<T> {
     return this.apiCall<T>('get', 'users/my-profile');
   }
+
+getEventById<T>(id: string | null): Observable<T> {
+    return this.apiCall<T>('get', `events/${id}`);
+  }
+
+RegisterEvent<T>(data:any): Observable<T> {
+    return this.apiCall<T>('post', `events/register`, data);
+  }
+
+  getParticipants<T>(eventId: string | null): Observable<T> {
+    return this.apiCall<T>('get', `events/${eventId}/participants`);
+  }
+
+  getEventByOrganizer<T>(organizerId: string): Observable<T> {
+    return this.apiCall<T>('get', `events/organiser/${organizerId}`);
+  }
+
+  deleteEvent<T>(eventId: string): Observable<T> {
+    return this.apiCall<T>('delete', `events/${eventId}`);
+}
+
 
 }
