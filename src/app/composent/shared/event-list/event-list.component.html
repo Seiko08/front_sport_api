@@ -3,7 +3,6 @@
   <div class="card-body">
     <h5 class="card-title">{{ event.label }}</h5>
     <p class="card-text">Date: {{ event.date | date:'short' }}</p>
-    <p class="card-text">Type: {{ event.type }}</p>
-    <p class="card-text">Adresse: {{ event.address.street }}, {{ event.address.postalCode }} {{ event.address.city }}</p>
-    <a [routerLink]="['/eventDetail', event.id]" class="btn btn-primary" >Afficher détails</a>
+    <a [routerLink]="['/event-details', event.id]" class="btn btn-primary me-2" >Afficher détails</a>
+
   </div>

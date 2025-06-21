@@ -20,6 +20,10 @@ export class EventListComponent implements OnInit {
       next: (res: any) => {
         this.events = res;
       },
+      error: (err: any) => {
+        console.error("Une erreur sauvage est apparut", err);
+      },
+
     });
   }
 }
