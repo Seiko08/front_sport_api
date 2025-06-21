@@ -1,0 +1,14 @@
+<div>
+    <h2>Liste des évènements organisés</h2>
+    <div *ngIf="events.length === 0" class="alert alert-info">
+        Aucun évènement trouvé.
+    </div>
+    <div *ngFor="let event of events" class="card mb-3">
+        <div class="card-body">
+        <h5 class="card-title">{{ event.label }}</h5>
+        <p class="card-text">Date: {{ event.date | date:'short' }}</p>
+        <a [routerLink]="['/event-details', event.id]" class="btn btn-primary me-2">Voir détails</a>
+        <a [routerLink]="['/event/edit', event.id]" class="btn btn-primary me-2">Modifier</a>
+        <app-delete-btn-event [eventId]="event.id"></app-delete-btn-event>
+
+</div>
