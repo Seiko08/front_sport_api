@@ -1,0 +1,22 @@
+<div *ngIf="eventDetails" class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">{{ eventDetails.label }}</h5>
+    <p class="card-text">Date: {{ eventDetails.date | date: 'short' }}</p>
+    <p class="card-text">Type: {{ eventDetails.type }}</p>
+    <p class="card-text">Adresse: {{ eventDetails.address.number }} {{ eventDetails.address.street }},{{ eventDetails.address.postalCode }} {{ eventDetails.address.city }}</p>
+   @for (item of listOfParticipants ; track item.id) {
+      <p class="card-text">Participant: {{ item.firstname }} {{ item.lastname }}</p>}
+      @empty{
+        <p class="card-text">Aucun participant pour cet évènement.</p>
+      }
+      @if (user && user.role === 'user') {
+        <p class="card-text">Organisateur: {{ eventDetails.organiser.firstname }} {{ eventDetails.organiser.lastname }}</p>
+        <app-subsribe-btn [eventId]="eventDetails.id"></app-subsribe-btn>
+      }
+    <a [routerLink]="['/eventDetails']" class="btn btn-primary me-2" >Retour</a>
+  </div>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
